@@ -6,17 +6,19 @@
 var flat = function (arr, n, depth = 0) {
   // Create an empty array called 'result' to store the flattened elements.
   let result = [];
-
   // Loop through each element in the 'arr' array using a 'for...of' loop.
-
-  // Check if the 'element' is an array and if the 'depth' is less than 'n'.
-
-  // Recursively call the 'flat' function on the 'element' with an increased 'depth'.
-
-  // Concatenate (combine) the 'recursivelyFlatten' array with the 'result' array.
-
-  // Add the 'element' to the 'result' array as is (not flattened).
-
+  for (let element of arr) {
+    // Check if the 'element' is an array and if the 'depth' is less than 'n'.
+    if (Array.isArray(element) && depth < n) {
+      // Recursively call the 'flat' function on the 'element' with an increased 'depth'.
+      let recursivelyFlatten = flat(element, n, depth + 1);
+      // Concatenate (combine) the 'recursivelyFlatten' array with the 'result' array.
+      result = result.concat(recursivelyFlatten);
+    } else {
+      // Add the 'element' to the 'result' array as is (not flattened).
+      result.push(element);
+    }
+  }
   // Return the 'result' array, which contains the flattened elements.
   return result;
 };
